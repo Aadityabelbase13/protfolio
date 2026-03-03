@@ -33,9 +33,9 @@ const skillCategories = [
 ];
 
 const education = [
-  { level: "SEE", title: "School Level Education", desc: "Completed secondary education with distinction" },
-  { level: "+2", title: "Higher Secondary (Science)", desc: "Science stream with focus on mathematics & physics" },
-  { level: "Bachelor", title: "Computer Engineering", desc: "Currently pursuing / planned — BSc. Computer Engineering" },
+  { level: "SEE", title: "Kanti Secondary School", desc: "Completed secondary education with distinction" },
+  { level: "+2", title: "Kanti Secondary School", desc: "Higher Secondary (Science) with focus on mathematics & physics" },
+  { level: "Bachelor", title: "Nepal College of Information and Technology", desc: "BSc. Computer Engineering" },
 ];
 
 const SkillBar = ({ name, level }: { name: string; level: number }) => {
