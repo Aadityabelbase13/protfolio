@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 
 const roles = [
   "Frontend Developer",
@@ -84,11 +84,15 @@ const HeroSection = () => {
                 <ArrowDown size={18} /> View Projects
               </a>
             </Button>
-            <Button variant="heroOutline" size="xl">
-              <Download size={18} /> Download CV
+            <Button variant="heroOutline" size="xl" asChild>
+              <a href="/cvresume.pdf" download>
+                <Download size={18} /> Download CV
+              </a>
             </Button>
-            <Button variant="heroSecondary" size="xl">
-              <FileText size={18} /> View Resume
+            <Button variant="heroSecondary" size="xl" asChild>
+              <a href="/cvresume.pdf" target="_blank" rel="noopener noreferrer">
+                <FileText size={18} /> View Resume
+              </a>
             </Button>
           </div>
         </motion.div>
