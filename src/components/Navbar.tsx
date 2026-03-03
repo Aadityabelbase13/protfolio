@@ -11,13 +11,14 @@ const navLinks = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
-    if (saved === "light") {
-      setDarkMode(false);
+    if (saved === "dark") {
+      setDarkMode(true);
+    } else {
       document.documentElement.classList.add("light");
     }
   }, []);

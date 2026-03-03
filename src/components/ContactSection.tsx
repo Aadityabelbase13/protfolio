@@ -10,7 +10,7 @@ const socials = [
   { icon: Facebook, href: "https://www.facebook.com/share/16JAGw58pz/", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite", label: "Instagram" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/aaditya-belbase-aa8768304", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Github, href: "https://github.com/Aadityabelbase13", label: "GitHub" },
 ];
 
 const ContactSection = () => {
