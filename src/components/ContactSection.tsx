@@ -7,9 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
 const socials = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Facebook, href: "https://www.facebook.com/share/16JAGw58pz/", label: "Facebook" },
+  { icon: Instagram, href: "https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/aaditya-belbase-aa8768304", label: "LinkedIn" },
   { icon: Github, href: "#", label: "GitHub" },
 ];
 
