@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/share/16JAGw58pz/", label: "Facebook" },
@@ -13,19 +14,34 @@ const socials = [
   { icon: Github, href: "https://github.com/Aadityabelbase13", label: "GitHub" },
 ];
 
+const EMAILJS_SERVICE_ID = "service_hbddcho";
+const EMAILJS_TEMPLATE_ID = "template_vyk78su";
+const EMAILJS_PUBLIC_KEY = "ficpadDz5WAAzHLMC";
+
 const ContactSection = () => {
   const ref = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formRef.current) return;
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
       toast.success("Message sent! I'll get back to you soon.");
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+      formRef.current.reset();
+    } catch {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -52,11 +68,12 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass-card p-8"
           >
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Name</label>
                 <Input
                   required
+                  name="from_name"
                   placeholder="Your name"
                   className="bg-muted/50 border-border/50 focus:border-primary/50"
                 />
@@ -66,6 +83,7 @@ const ContactSection = () => {
                 <Input
                   required
                   type="email"
+                  name="from_email"
                   placeholder="your@email.com"
                   className="bg-muted/50 border-border/50 focus:border-primary/50"
                 />
@@ -74,6 +92,7 @@ const ContactSection = () => {
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Message</label>
                 <Textarea
                   required
+                  name="message"
                   rows={5}
                   placeholder="Tell me about your project..."
                   className="bg-muted/50 border-border/50 focus:border-primary/50 resize-none"
