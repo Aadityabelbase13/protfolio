@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/share/16JAGw58pz/", label: "Facebook" },
@@ -12,20 +13,32 @@ const socials = [
   { icon: Linkedin, href: "https://www.linkedin.com/in/aaditya-belbase-aa8768304", label: "LinkedIn" },
   { icon: Github, href: "https://github.com/Aadityabelbase13", label: "GitHub" },
 ];
-
+const EMAILJS_SERVICE_ID = "service_hbddcho";
+const EMAILJS_TEMPLATE_ID = "template_vyk78su";
+const EMAILJS_PUBLIC_KEY = "ficpadDz5WAAzHLMC";
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [sending, setSending] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const formRef = useRef<HTMLFormElement>(null);
+   const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+    if (!formRef.current) return;
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+   try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
       toast.success("Message sent! I'll get back to you soon.");
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+       formRef.current.reset();
+    } catch {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -52,11 +65,11 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass-card p-8"
           >
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">              <div>
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Name</label>
                 <Input
                   required
+                  name="from_name"
                   placeholder="Your name"
                   className="bg-muted/50 border-border/50 focus:border-primary/50"
                 />
@@ -74,6 +87,7 @@ const ContactSection = () => {
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Message</label>
                 <Textarea
                   required
+                  name="message"
                   rows={5}
                   placeholder="Tell me about your project..."
                   className="bg-muted/50 border-border/50 focus:border-primary/50 resize-none"
@@ -110,6 +124,8 @@ const ContactSection = () => {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
+                    target="_blank"
+                  rel="noopener noreferrer"
                   className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(var(--glow-cyan)/0.4)] transition-all duration-300 hover:-translate-y-1"
                 >
                   <s.icon size={20} />

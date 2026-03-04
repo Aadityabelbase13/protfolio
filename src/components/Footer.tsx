@@ -19,6 +19,8 @@ const Footer = () => (
             <a
               key={s.label}
               href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={s.label}
               className="w-9 h-9 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
