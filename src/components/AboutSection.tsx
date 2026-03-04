@@ -87,7 +87,7 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-card p-8"
+            className="glass-card p-6 h-fit"
           >
             <h3 className="font-display text-2xl font-semibold mb-4 text-foreground">
               Who I Am
