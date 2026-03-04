@@ -83,8 +83,22 @@ const Navbar = () => {
           <button onClick={toggleTheme} className="p-2 rounded-full bg-muted">
             {darkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2">
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="p-2 relative z-50"
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <X size={20} />
+                </motion.div>
+              ) : (
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Menu size={20} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
       </div>

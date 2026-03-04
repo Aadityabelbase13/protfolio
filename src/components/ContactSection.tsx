@@ -109,6 +109,8 @@ const ContactSection = () => {
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(var(--glow-cyan)/0.4)] transition-all duration-300 hover:-translate-y-1"
                 >
