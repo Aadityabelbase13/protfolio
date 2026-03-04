@@ -85,7 +85,11 @@ const HeroSection = () => {
               </a>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
+<<<<<<< HEAD
                  <a href="/cvresume.pdf" target="_blank" rel="noopener noreferrer" download>
+=======
+              <a href="/cvresume.pdf" target="_blank" rel="noopener noreferrer" download>
+>>>>>>> 68251462f8e677528ce55a77743b7c869b8c1259
                 <Download size={18} /> Download CV
               </a>
             </Button>

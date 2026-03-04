@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from "react"; 
 import { motion, useInView } from "framer-motion";
 import { Send, Facebook, Instagram, Linkedin, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,19 +13,23 @@ const socials = [
   { icon: Linkedin, href: "https://www.linkedin.com/in/aaditya-belbase-aa8768304", label: "LinkedIn" },
   { icon: Github, href: "https://github.com/Aadityabelbase13", label: "GitHub" },
 ];
+
 const EMAILJS_SERVICE_ID = "service_hbddcho";
 const EMAILJS_TEMPLATE_ID = "template_vyk78su";
 const EMAILJS_PUBLIC_KEY = "ficpadDz5WAAzHLMC";
+
 const ContactSection = () => {
   const ref = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [sending, setSending] = useState(false);
-const formRef = useRef<HTMLFormElement>(null);
-   const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!formRef.current) return;
+
     setSending(true);
-   try {
+    try {
       await emailjs.sendForm(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -33,7 +37,7 @@ const formRef = useRef<HTMLFormElement>(null);
         EMAILJS_PUBLIC_KEY
       );
       toast.success("Message sent! I'll get back to you soon.");
-       formRef.current.reset();
+      formRef.current.reset();
     } catch {
       toast.error("Failed to send message. Please try again.");
     } finally {
@@ -65,7 +69,8 @@ const formRef = useRef<HTMLFormElement>(null);
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass-card p-8"
           >
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">              <div>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+              <div>
                 <label className="text-sm font-medium text-foreground mb-1.5 block">Name</label>
                 <Input
                   required
@@ -79,6 +84,7 @@ const formRef = useRef<HTMLFormElement>(null);
                 <Input
                   required
                   type="email"
+                  name="from_email"
                   placeholder="your@email.com"
                   className="bg-muted/50 border-border/50 focus:border-primary/50"
                 />
@@ -123,9 +129,9 @@ const formRef = useRef<HTMLFormElement>(null);
                 <a
                   key={s.label}
                   href={s.href}
-                  aria-label={s.label}
-                    target="_blank"
+                  target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={s.label}
                   className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(var(--glow-cyan)/0.4)] transition-all duration-300 hover:-translate-y-1"
                 >
                   <s.icon size={20} />
